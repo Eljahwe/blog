@@ -1,0 +1,27 @@
+<div class="container">
+	<h2>Beitrag editieren</h2>
+
+	<%= tinymce %>
+
+	<%= form_for @post do |f| %>
+		<p>
+			<%= f.label :title %></br>
+			<%= f.text_field :title %>
+		</p>
+		<p>
+			<%= f.label :content %></br>
+			<%= f.text_area :content, :class => "tinymce" %>
+		</p>
+		<p>
+			<%= f.submit "Editieren" %>
+		</p>
+	<% end %>
+</div>
+
+<script type="text/javascript">
+	$(document).on('focusin', function(e) {
+		if ($(e.target).closest(".tox-tinymce-aux, .moxman-window, .tam-assetmanager-root").length) {
+		  e.stopImmediatePropagation();
+		}
+	});
+</script>

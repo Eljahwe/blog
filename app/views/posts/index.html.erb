@@ -1,0 +1,42 @@
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('../assets/home-bg.jpg')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="site-heading">
+          <h1>Clean Blog</h1>
+          <span class="subheading">A Blog Theme by Start Bootstrap</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+
+    	<% @posts.each do |post| %>
+	    	<div class="post-preview">
+					<h2 class="post-title"><%= link_to post.title, post %></h2>
+					<h3 class="post-subtitle"><%= post.content.html_safe %></h3>
+          <% if user_signed_in? %>
+					  <p><%= link_to "edit", edit_post_path(post) %> | <%= link_to "delete", post, :data => {:confirm => "Bist du sicher?"}, :method => :delete %></p>
+          <% end %>
+				</div>
+			<% end %>
+
+      <% if user_signed_in? %>
+			  <p><%= link_to "Neuen Beitrag erstellen", new_post_path %></p>
+      <% end %>
+
+      <!-- Pager >
+      <div class="clearfix">
+        <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+      </div-->
+      <%= will_paginate @posts %>
+    </div>
+  </div>
+</div>
